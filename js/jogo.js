@@ -30,7 +30,7 @@
       //percorremos todas as divs armazenadas
       for (i = 0; i < divis.length; i++) {
         //verificamos se sao as divs com ids 0 ou 1 ou 2
-        if (divis[i].id == 0 || divis[i].id == 1 || divis[i].id == 2) {
+        if (divis[i].id == 0 || divis[i].id == 1 || divis[i].id == 2 || divis[i].id == 3) {
           //alteramos a classe css das divs 0, 1 e 2 (className)
           divis[i].className = "inicial";
         }
@@ -42,6 +42,13 @@
       if (imagem != "") {
         //removemos a imagem do Smile
         imagem.remove();
+      }
+      //armazenamos a imagem do erro na variável imgerro (getElementById)
+      let imgerro = document.getElementById("imgerro");
+      //se a imagem do erro nao for vazia (se ela existir)
+      if (imgerro != "") {
+        //removemos a imagem do erro
+        imgerro.remove();
       }
     }
 
@@ -62,12 +69,12 @@
       const img = new Image(100);
       img.id = "imagem";
       //altera o atributo src (source) da imagem criada
-      img.src = "https://upload.wikimedia.org/wikipedia/commons/2/2e/Oxygen480-emotes-face-smile-big.svg";
+      img.src = "https://pngimg.com/d/smiley_PNG149.png";
       //adiciona a imagem criada na div (obj) escolhida pelo jogador (appendChild)
       obj.appendChild(img);
     }
 
-    //Função que sorteia um número aleatório entre 0 e 2 e verifica se o jogador acertou
+    //Função que sorteia um número aleatório entre 0 e 3 e verifica se o jogador acertou
     function verifica(obj) {
       //se jogar é verdadeiro
       if (jogar) {
@@ -76,14 +83,14 @@
         //incrementa as tentativas
         tentativas++;
         //verifica se jogou 3 vezes
-        if (tentativas == 3) {
+        if (tentativas == 5) {
           //oculta o botao joganovamente alterando a classe css (getElementById e className)
           btnJogarNovamente.className = 'invisivel';
           //mostra o botao reiniciar alterando a classe css (getElementById e className)
           btnReiniciar.className = 'visivel';
         }
         //a variável sorteado recebe um valor inteiro (Math.floor) aleatório (Math.random)
-        let sorteado = Math.floor(Math.random() * 3);
+        let sorteado = Math.floor(Math.random() * 4);
         //se o id da <div> escolhida pelo jogador for igual ao número sorteado
         if (obj.id == sorteado) {
           //chama a funçao acertou passando a div escolhida pelo jogador
@@ -97,6 +104,11 @@
           const objSorteado = document.getElementById(sorteado);
           //chama a funçao acertou para mostrar a div aonde está o Smile
           acertou(objSorteado);
+          //imagem quando erra//
+          const imgerro = new Image(100);
+          imgerro.id = "imgerro";
+          imgerro.src = "https://static-00.iconduck.com/assets.00/emoji-sad-icon-1024x1024-t873gdf3.png"; // Caminho para a imagem de erro
+          obj.appendChild(imgerro); // Adiciona a imagem na carta errada
         }
         //chama a funçao que atualiza o placar
         atualizaPlacar(acertos, tentativas);
